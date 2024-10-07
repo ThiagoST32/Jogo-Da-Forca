@@ -9,11 +9,11 @@ namespace JogoDaForca.Repositories
         public WordsRepository()
         {
             _words = new List<Words>();
-            _words.Add(new Words("Nome", "João"));
-            _words.Add(new Words("Comida", "Banana"));
-            _words.Add(new Words("Cidade", "São Paulo"));
-            _words.Add(new Words("Carro", "Mclares"));
-            _words.Add(new Words("Moto", "H2R"));
+            _words.Add(new Words("Nome", "João".ToUpper()));
+            _words.Add(new Words("Comida", "Banana".ToUpper()));
+            _words.Add(new Words("Cidade", "São Paulo".ToUpper()));
+            _words.Add(new Words("Carro", "Mclares".ToUpper()));
+            _words.Add(new Words("Moto", "H2R".ToUpper()));
         }
 
         public Words GetRandomWords()
