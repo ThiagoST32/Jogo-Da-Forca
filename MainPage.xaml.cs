@@ -12,15 +12,11 @@ namespace JogoDaForca
         public MainPage()
         {
             InitializeComponent();
+            ResetScreen();
 
-            var repository = new WordsRepository();
-            _word = repository.GetRandomWords();
-
-            LblTips.Text = _word.Tips;
-            LblText.Text = new string('_', _word.Text.Length);
         }
 
-        private void OnButtonClick(object sender, EventArgs e)
+        private async void OnButtonClick(object sender, EventArgs e)
         {
             ((Button)sender).IsEnabled = false;
 
@@ -32,12 +28,59 @@ namespace JogoDaForca
             {
                 _errors++;
                 ((Button)sender).IsEnabled = false;
+                LblErrors.Text = _errors.ToString();
+                ImgMain.Source = ImageSource.FromFile($"forca{_errors + 1}.png");
+
+                if (_errors == 6)
+                {
+                    await DisplayAlert("Perdeu!", "Quer começar um novo jogo?", "OK");
+                    ResetScreen();
+                }
+
                 return;
             }
 
-            foreach (int position in positions) 
+            foreach (int position in positions)
             {
                 LblText.Text = LblText.Text.Remove(position, 1).Insert(position, letter);
+            }
+        }
+
+        private void ResetScreen()
+        {
+            ResetErrors();
+            ResetVirtualKeyboard();
+            GenerateNewWord();
+        }
+
+        private void GenerateNewWord()
+        {
+            var repository = new WordsRepository();
+            _word = repository.GetRandomWords();
+
+            LblTips.Text = _word.Tips;
+            LblText.Text = new string('_', _word.Text.Length);
+            LblErrors.Text = _errors.ToString();
+        }
+
+        private void ResetErrors()
+        {
+            _errors = 0;
+            ImgMain.Source = ImageSource.FromFile("forca1.png");
+        }
+
+        private void ResetVirtualKeyboard()
+        {
+            ResetVirtualKeys((HorizontalStackLayout)KeyboardContainer.Children[0]);
+            ResetVirtualKeys((HorizontalStackLayout)KeyboardContainer.Children[1]);
+            ResetVirtualKeys((HorizontalStackLayout)KeyboardContainer.Children[2]);
+        }
+
+        private void ResetVirtualKeys(HorizontalStackLayout horizontal)
+        {
+            foreach (Button button in horizontal.Children)
+            {
+                button.IsEnabled = true;
             }
         }
     }
