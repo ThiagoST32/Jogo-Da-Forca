@@ -18,9 +18,11 @@ namespace JogoDaForca
 
         private async void OnButtonClick(object sender, EventArgs e)
         {
-            ((Button)sender).IsEnabled = false;
+            Button button = (Button)sender;
+            button.IsEnabled = false;
 
-            string letter = ((Button)sender).Text;
+
+            string letter = button.Text;
 
             var positions = _word.Text.GetPositions(letter);
 
@@ -30,6 +32,7 @@ namespace JogoDaForca
                 ((Button)sender).IsEnabled = false;
                 LblErrors.Text = _errors.ToString();
                 ImgMain.Source = ImageSource.FromFile($"forca{_errors + 1}.png");
+                button.Style = (Style)App.Current.Resources.MergedDictionaries.ElementAt(1)["Fail"];
 
                 if (_errors == 6)
                 {
@@ -43,6 +46,7 @@ namespace JogoDaForca
             foreach (int position in positions)
             {
                 LblText.Text = LblText.Text.Remove(position, 1).Insert(position, letter);
+                button.Style = (Style)App.Current.Resources.MergedDictionaries.ElementAt(1)["Sucess"];
             }
         }
 
@@ -80,6 +84,7 @@ namespace JogoDaForca
         {
             foreach (Button button in horizontal.Children)
             {
+                button.Style = (Style)App.Current.Resources.MergedDictionaries.ElementAt(1)["NormalButton"];
                 button.IsEnabled = true;
             }
         }
