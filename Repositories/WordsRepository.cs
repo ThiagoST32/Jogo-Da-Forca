@@ -12,7 +12,7 @@ namespace JogoDaForca.Repositories
             _words.Add(new Words("Nome", "João".ToUpper()));
             _words.Add(new Words("Comida", "Banana".ToUpper()));
             _words.Add(new Words("Cidade", "São Paulo".ToUpper()));
-            _words.Add(new Words("Carro", "Mclares".ToUpper()));
+            _words.Add(new Words("Carro", "Mclaren".ToUpper()));
             _words.Add(new Words("Moto", "H2R".ToUpper()));
         }
 

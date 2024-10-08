@@ -48,6 +48,7 @@ namespace JogoDaForca
             if (!LblText.Text.Contains("_"))
             {
                 await DisplayAlert("Parabens!", "Você Ganhou o jogo", "Novo jogo!");
+                ResetScreen();
             }
         }
         
