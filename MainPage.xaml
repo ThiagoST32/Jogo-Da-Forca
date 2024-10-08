@@ -4,7 +4,9 @@
              x:Class="JogoDaForca.MainPage">
 
     <ScrollView>
+            
         <FlexLayout Direction="Column" JustifyContent="SpaceBetween">
+            <Button Text="Reiniciar" HorizontalOptions="Center" Clicked="ButtonRestartPlay"/>
             <Image
                 x:Name="ImgMain"
                 Source="forca1.png"
